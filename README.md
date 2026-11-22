@@ -85,3 +85,7 @@ The publish steps are placeholders until a static host is chosen. Set up the `de
 - [Analysis](docs/analysis.md): current state, gaps, risks
 - [Features](docs/features.md): what the widget does and its rules
 - [Decisions](docs/decisions/): architecture decision records
+
+## Contributing
+
+Keep changes small and focused, and update the docs when behavior changes.
