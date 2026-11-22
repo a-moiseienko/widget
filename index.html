@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chat widget demo</title>
+    <style>
+      body { margin: 0; font: 16px/1.6 Georgia, "Times New Roman", serif; color: #16212c; background: #fff; }
+      main { max-width: 38rem; margin: 0 auto; padding: 4rem 1.25rem; }
+      h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 1rem; }
+      code { font: 0.9em ui-monospace, Consolas, monospace; background: #f3f6f8; padding: 0.1em 0.35em; border-radius: 4px; }
+      ul { padding-left: 1.2rem; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>A page with the chat widget on it</h1>
+      <p>This is a stand-in for your website. The chat button sits in the bottom-right corner and talks to the backend at <code>http://localhost:8080</code>.</p>
+      <p>The backend answers these questions:</p>
+      <ul>
+        <li>Hello</li>
+        <li>What are your opening hours?</li>
+        <li>How can I contact support?</li>
+        <li>How do I reset my password?</li>
+        <li>Do you offer refunds?</li>
+        <li>Where is my order?</li>
+        <li>Thanks</li>
+      </ul>
+      <p>Anything else gets a fallback answer. Messages are limited to 250 characters.</p>
+    </main>
+    <script type="module" src="/src/demo.ts"></script>
+  </body>
+</html>
