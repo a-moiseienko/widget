@@ -1,0 +1,74 @@
+name: ci-cd
+
+on:
+  push:
+    branches: [master]
+    tags: ['v*']
+  pull_request:
+    branches: [master]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Typecheck (tsc --noEmit)
+        run: npm run typecheck
+      - name: Lint (typescript-eslint, type-checked)
+        run: npm run lint
+      - run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: chat-widget-${{ github.sha }}
+          path: dist/
+          retention-days: 30
+
+  deploy-dev:
+    needs: verify
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: chat-widget-${{ github.sha }}
+          path: dist
+      - name: Publish widget to dev
+        run: |
+          ls -la dist
+          # Replace with your static host upload, e.g. Cloudflare Pages:
+          # npx wrangler pages deploy dist --project-name chat-widget-dev
+
+  promote-prod:
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Refuse to release a commit that is not on master
+        run: |
+          git fetch origin master
+          if ! git merge-base --is-ancestor "${{ github.sha }}" origin/master; then
+            echo "::error::Tag ${{ github.ref_name }} points at a commit that is not on master."
+            exit 1
+          fi
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+
+      - name: Publish widget to prod
+        run: |
+          ls -la dist
+          # Replace with your prod static host upload.
