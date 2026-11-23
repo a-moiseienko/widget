@@ -5,3 +5,8 @@ services:
     buildCommand: npm ci && npm run build
     staticPublishPath: ./dist
     pullRequestPreviewsEnabled: true
+    envVars:
+      - key: WIDGET_API_URL
+        value: https://chat-backend-vxzk.onrender.com
+      - key: WIDGET_SELF_URL
+        value: https://chat-widget-2r2b.onrender.com

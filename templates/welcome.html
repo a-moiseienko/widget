@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chat widget</title>
+    <style>
+      body { margin: 0; font: 16px/1.6 Georgia, "Times New Roman", serif; color: #16212c; background: #fff; }
+      main { max-width: 38rem; margin: 0 auto; padding: 4rem 1.25rem; }
+      h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 1rem; }
+      code { font: 0.9em ui-monospace, Consolas, monospace; background: #f3f6f8; padding: 0.1em 0.35em; border-radius: 4px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Chat widget</h1>
+      <p>Open the chat button in the bottom-right corner to try it. It talks to the backend at <code>__API_URL__</code>.</p>
+      <p>Embed it on your own site with one script tag:</p>
+      <pre><code>&lt;script src="__SELF_URL__/chat-widget.js"
+        data-api-url="__API_URL__"
+        data-title="Support chat"&gt;&lt;/script&gt;</code></pre>
+    </main>
+    <script src="./chat-widget.js" data-api-url="__API_URL__" data-title="Support chat"></script>
+  </body>
+</html>
