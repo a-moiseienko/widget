@@ -42,21 +42,28 @@ export class ChatWidget {
     style.textContent = STYLES;
 
     this.launcher.type = "button";
-    this.launcher.textContent = "Chat with us";
     this.launcher.setAttribute("aria-expanded", "false");
+    const launcherMark = el("span", "mark");
+    launcherMark.setAttribute("aria-hidden", "true");
+    const launcherLabel = document.createTextNode("Chat with us");
+    this.launcher.append(launcherMark, launcherLabel);
 
     this.panel.hidden = true;
     this.panel.setAttribute("role", "dialog");
     this.panel.setAttribute("aria-label", title);
 
     const header = el("header", "header");
+    const headerId = el("div", "header-id");
+    const headerMark = el("span", "mark");
+    headerMark.setAttribute("aria-hidden", "true");
     const heading = el("h2", "title");
     heading.textContent = title;
+    headerId.append(headerMark, heading);
     const closeButton = el("button", "close");
     closeButton.type = "button";
     closeButton.textContent = "×";
     closeButton.setAttribute("aria-label", "Close chat");
-    header.append(heading, closeButton);
+    header.append(headerId, closeButton);
 
     this.messages.setAttribute("role", "log");
     this.messages.setAttribute("aria-live", "polite");
