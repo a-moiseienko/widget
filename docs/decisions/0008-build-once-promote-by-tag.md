@@ -17,5 +17,5 @@ The team wants every push to `master` to reach dev and production to follow a re
 ## Consequences
 
 - Production builds from the tagged source. The result matches the dev artifact only if the build is reproducible, so the lockfile and the pinned Node version matter.
-- The publish steps are placeholders until we pick a static host (for example Cloudflare Pages).
+- The publish steps were placeholders until a static host was picked; see [0009](0009-host-provider.md).
 - Developers need Node 26 locally to match CI.

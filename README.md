@@ -78,12 +78,13 @@ To release, tag a commit that is already on `master`:
     git tag v0.1.0
     git push origin v0.1.0
 
-The publish steps are placeholders until a static host is chosen. Set up the `dev` and `production` environments (with required reviewers on `production`) and protect `master` in the GitHub repository settings.
+The site deploys to [Render](https://render.com) using the `render.yaml` Blueprint (static site, built from `npm run build`). The GitHub Actions publish steps are still placeholders; Render currently redeploys on push via its own GitHub integration instead. Set up the `dev` and `production` environments (with required reviewers on `production`) and protect `master` in the GitHub repository settings.
 
 ## Docs
 
 - [Analysis](docs/analysis.md): current state, gaps, risks
 - [Features](docs/features.md): what the widget does and its rules
+- [Request sequence](docs/request-sequence.md): sequence diagram of a chat request across widget and backend classes
 - [Decisions](docs/decisions/): architecture decision records
 
 ## Contributing
