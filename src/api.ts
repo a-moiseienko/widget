@@ -1,3 +1,5 @@
+import { SESSION_ID_HEADER } from "./session";
+
 export class ChatApiError extends Error {}
 
 interface ChatResponse {
@@ -13,11 +15,11 @@ function isChatResponse(value: unknown): value is ChatResponse {
   );
 }
 
-/** Sends one question to the backend and returns the answer text. */
-export async function askQuestion(apiUrl: string, message: string): Promise<string> {
+/** Sends one question, as part of the given session, to the backend and returns the answer text. */
+export async function askQuestion(apiUrl: string, message: string, sessionId: string): Promise<string> {
   const response = await fetch(apiUrl.replace(/\/+$/, "") + "/api/chat", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", [SESSION_ID_HEADER]: sessionId },
     body: JSON.stringify({ message }),
   });
 

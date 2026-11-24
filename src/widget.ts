@@ -1,5 +1,6 @@
 import { askQuestion } from "./api";
 import { MAX_MESSAGE_LENGTH, clampToLimit, countChars } from "./limits";
+import { getSessionId } from "./session";
 import { STYLES } from "./styles";
 import type { MessageKind, WidgetOptions } from "./types";
 
@@ -32,6 +33,7 @@ export class ChatWidget {
   private readonly limit = el("div", "limit");
   private readonly meterFill = el("div", "meter-fill");
   private readonly counter = el("span", "counter");
+  private readonly sessionId = getSessionId();
   private pending = false;
 
   constructor(options: WidgetOptions) {
@@ -156,7 +158,7 @@ export class ChatWidget {
     this.refresh();
 
     try {
-      this.addMessage("support", await askQuestion(this.apiUrl, text));
+      this.addMessage("support", await askQuestion(this.apiUrl, text, this.sessionId));
     } catch {
       this.addMessage("error", NETWORK_ERROR);
     } finally {
